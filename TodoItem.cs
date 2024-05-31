@@ -4,9 +4,15 @@ class TodoItem
     public string Description { get; set;}
     public bool IsCompleted {get; set;}
 
-    public TodoItem(string description)
+    public TodoItem(int id, string description)
     {
         Description = description;
         IsCompleted = false;
+        Id = id;
+    }
+
+    override public string ToString()
+    {
+        return $"{Id} {(IsCompleted ? "[X]" : "[ ]" )} {Description}";
     }
 }
