@@ -1,2 +1,2 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿TodoItem item = new TodoItem("Walk the dog.");
+Console.WriteLine(item.Description);
