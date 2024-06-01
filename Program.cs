@@ -1,14 +1,115 @@
-﻿TodoList todoList = new TodoList();
+﻿string? readResult;
+bool validEntry = false;
+string menuSelection = "";
+TodoList todoList = new TodoList();
 
-TodoItem item = new TodoItem(todoList.NextId, "Walk the dog");
-todoList.AddItem(item);
+do
+{
+    Console.Clear();
 
-item = new TodoItem(todoList.NextId, "Take out the trash");
-todoList.AddItem(item);
+    Console.WriteLine("Welcome to the To-do List app. Your main menu options are:");
+    Console.WriteLine(" 1. Display all tasks");
+    Console.WriteLine(" 2. Add a new task");
+    Console.WriteLine(" 3. Remove a task");
+    Console.WriteLine(" 4. Mark a task as completed");
+    Console.WriteLine();
+    Console.WriteLine("Enter your selection number (or type Exit to exit the program)");
 
-item = new TodoItem(todoList.NextId, "Take out the trash");
-todoList.AddItem(item);
+    readResult = Console.ReadLine();
+    if (readResult != null)
+    {
+        menuSelection = readResult.ToLower();
+    }
 
-todoList.MarkItemAsCompleted(item.Id);
+    switch (menuSelection)
+    {
+        // Display To-do List
+        case "1":
+            Console.WriteLine();
+            Console.WriteLine("ID\tTask");
+            Console.WriteLine("--\t----");
+            todoList.DisplayItems();
 
-todoList.DisplayItems();
+            Console.WriteLine("\n\rPress the Enter key to continue");
+            readResult = Console.ReadLine();
+            break;
+        // Add a new task
+        case "2":
+            do 
+            {
+                Console.WriteLine("Enter a description for this task: ");
+                readResult = Console.ReadLine();
+                if (readResult != null)
+                {
+                    TodoItem item = new TodoItem(todoList.NextId, readResult);
+                    todoList.AddItem(item);
+                    validEntry = true;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid entry. Please try again.");
+                }
+            } while (validEntry != true);
+
+            Console.WriteLine("\n\rPress the Enter key to continue");
+            readResult = Console.ReadLine();
+            break;
+        // Remove a task
+        case "3":
+            do 
+            {
+                Console.WriteLine("Enter the ID of the task you want to remove: ");
+                readResult = Console.ReadLine();
+                if (readResult != null)
+                {
+                    validEntry = int.TryParse(readResult, out int id);
+                    if (validEntry != false)
+                    {
+                        todoList.RemoveItem(id);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid entry. Please enter a valid integer.");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Invalid entry. Please try again.");
+                }
+            } while (validEntry == false);
+
+            Console.WriteLine("\n\rPress the Enter key to continue");
+            readResult = Console.ReadLine();
+            break;
+        
+        // Mark a task as completed
+        case "4":
+            do 
+            {
+                Console.WriteLine("Enter the ID of the task you want to complete: ");
+                readResult = Console.ReadLine();
+                if (readResult != null)
+                {
+                    validEntry = int.TryParse(readResult, out int id);
+                    if (validEntry != false)
+                    {
+                        todoList.MarkItemAsCompleted(id);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid entry. Please enter a valid integer.");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Invalid entry. Please try again.");
+                }
+            } while (validEntry == false);
+
+            Console.WriteLine("\n\rPress the Enter key to continue");
+            readResult = Console.ReadLine();
+            break;
+        default:
+            break;
+    }
+} while (menuSelection != "exit");

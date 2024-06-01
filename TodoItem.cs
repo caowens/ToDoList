@@ -13,6 +13,6 @@ class TodoItem
 
     override public string ToString()
     {
-        return $"{Id} {(IsCompleted ? "[X]" : "[ ]" )} {Description}";
+        return $"{Id}\t{(IsCompleted ? "[X]" : "[ ]" )} {Description}";
     }
 }
