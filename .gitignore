@@ -1,0 +1,6 @@
+# .vscode directory
+.vscode/
+
+# Build results
+bin/
+obj/
