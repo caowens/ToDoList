@@ -12,6 +12,7 @@ do
     Console.WriteLine(" 2. Add a new task");
     Console.WriteLine(" 3. Remove a task");
     Console.WriteLine(" 4. Mark a task as completed");
+    Console.WriteLine(" 5. Edit a task");
     Console.WriteLine();
     Console.WriteLine("Enter your selection number (or type Exit to exit the program)");
 
@@ -33,6 +34,7 @@ do
             Console.WriteLine("\n\rPress the Enter key to continue");
             readResult = Console.ReadLine();
             break;
+        
         // Add a new task
         case "2":
             do 
@@ -54,6 +56,7 @@ do
             Console.WriteLine("\n\rPress the Enter key to continue");
             readResult = Console.ReadLine();
             break;
+        
         // Remove a task
         case "3":
             do 
@@ -94,6 +97,49 @@ do
                     if (validEntry != false)
                     {
                         todoList.MarkItemAsCompleted(id);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid entry. Please enter a valid integer.");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Invalid entry. Please try again.");
+                }
+            } while (validEntry == false);
+
+            Console.WriteLine("\n\rPress the Enter key to continue");
+            readResult = Console.ReadLine();
+            break;
+        
+        // Edit a task
+        case "5":
+            do 
+            {
+                Console.WriteLine("Enter the ID of the task you want to edit: ");
+                readResult = Console.ReadLine();
+                if (readResult != null)
+                {
+                    validEntry = int.TryParse(readResult, out int id);
+                    if (validEntry != false)
+                    {
+                        Console.WriteLine("Please enter the new description:");
+                        bool validDescription = false;
+                        do 
+                        {
+                            readResult = Console.ReadLine();
+                            if (readResult != null)
+                            {
+                                todoList.EditItem(id, readResult);
+                                Console.WriteLine($"The task description at Id {id} is now \"{readResult}\" ");
+                                validDescription = true;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Invalid entry. Please try again.");
+                            }
+                        } while (validDescription == false);
                     }
                     else
                     {

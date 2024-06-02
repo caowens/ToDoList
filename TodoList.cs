@@ -46,4 +46,18 @@ class TodoList
             item.IsCompleted = true;
         }
     }
+
+    public void EditItem(int id, string description)
+    {
+        TodoItem? item = Items.Find(i => i.Id == id);
+        
+        if (item != null)
+        {
+            item.Description = description; 
+        }
+        else
+        {
+            Console.WriteLine("A task does not exist at that Id.");
+        }
+    }
 }
